@@ -42,4 +42,26 @@ monsters = {"Stoneling":{"Strength": 7,
                          "Cunning": 2,}
                          }
 
-print(monsters)
+def main_menu():
+    action = easygui.buttonbox("What Would you like to do?", choices=['Add Monsters','Delete Monsters','Print Monsters','Quit'], title="Main Menu")
+    if action == "Add Monsters":
+        add_this()
+    elif action == "Delete Monsters":
+        delete()
+    elif action == "Print Monsters":
+        print_menu()
+    else:
+        quit()
+
+def print_menu():
+    try:
+        for monsters_id, monsters_info in monsters.items():
+            print("\nMonster ID:", monsters_id)
+
+            for key in monsters_info:
+                print (key + ":", monsters_info[key])
+    except:
+        print("There are no Monsters Left!")
+    main_menu()
+
+main_menu()
