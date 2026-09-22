@@ -72,7 +72,7 @@ def add_this():
     monsters[ID]["cunning"] = mcunning
 
     easygui.msgbox(monsters)
-
+# need to fix unexpected output issue
     while True:
         add = easygui.enterbox("Would you like to add another Monster? (Y/N):")
         if add.capitalize() == "Y":
