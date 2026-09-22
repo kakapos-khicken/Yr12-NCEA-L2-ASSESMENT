@@ -42,6 +42,7 @@ monsters = {"Stoneling":{"Strength": 7,
                          "Cunning": 2,}
                          }
 
+# this is my main menu code 
 def main_menu():
     action = easygui.buttonbox("What Would you like to do?", choices=['Add Monsters','Delete Monsters','Print Monsters','Quit'], title="Main Menu")
     if action == "Add Monsters":
@@ -54,11 +55,11 @@ def main_menu():
         easygui.msgbox("Thank you for playing. See you next time!!!")
         quit()
 
-#working add menu. Thinking of adding a forced capital to the monsters name
+# 9/9/26 working add menu. Thinking of adding a forced capital to the monsters name
 def add_this():
     ID = easygui.enterbox("\n\nEnter Monster name: ")
     monsters[ID] = {}
-
+    #22/9/26 need to add number cap of 25 to all .integerbox in def addthis
     mstrength = easygui.integerbox("Enter Monsters strength: ")
     monsters[ID]["strength"] = mstrength
 
@@ -72,7 +73,8 @@ def add_this():
     monsters[ID]["cunning"] = mcunning
 
     easygui.msgbox(monsters)
-# need to fix unexpected output issue
+
+ # 11/9/26 need to fix unexpected output issue. might swap .enterbox with .buttonbox
     while True:
         add = easygui.enterbox("Would you like to add another Monster? (Y/N):")
         if add.capitalize() == "Y":
@@ -80,8 +82,23 @@ def add_this():
             add_this()
         elif add.capitalize() == "N":
             print("Thank you for adding another Monster!")
+            main_menu()
+
+# 22/9/26 this is the code to delete a monster
+def delete():
+    kill = easygui.enterbox("Enter the name of the monster you want to delete:")
+    if kill.capitalize() in monsters:
+        corrected_input = kill.capitalize()
+        easygui.msgbox(f"Result: {corrected_input}")
+
+        monsters.pop(corrected_input)
+        print(monsters)
+        main_menu()
+    else:
+        easygui.msgbox("That monster does not exist!!")
         main_menu()
 
+# 22/9/26 this is the code to print all monsters. might see if i can add a random print
 def print_menu():
     try:
         for monsters_id, monsters_info in monsters.items():
