@@ -51,7 +51,36 @@ def main_menu():
     elif action == "Print Monsters":
         print_menu()
     else:
+        easygui.msgbox("Thank you for playing. See you next time!!!")
         quit()
+
+#working add menu. Thinking of adding a forced capital to the monsters name
+def add_this():
+    ID = easygui.enterbox("\n\nEnter Monster name: ")
+    monsters[ID] = {}
+
+    mstrength = easygui.integerbox("Enter Monsters strength: ")
+    monsters[ID]["strength"] = mstrength
+
+    mspeed = easygui.integerbox("Enter Monsters speed: ")
+    monsters[ID]["speed"] = mspeed
+
+    mstealth = easygui.integerbox("Enter Monsters stealth: ")
+    monsters[ID]["stealth"] = mstealth
+
+    mcunning = easygui.integerbox("Enter Monsters cunning: ")
+    monsters[ID]["cunning"] = mcunning
+
+    easygui.msgbox(monsters)
+
+    while True:
+        add = easygui.enterbox("Would you like to add another Monster? (Y/N):")
+        if add.capitalize() == "Y":
+            print("Let's add another Monster!")
+            add_this()
+        elif add.capitalize() == "N":
+            print("Thank you for adding another Monster!")
+        main_menu()
 
 def print_menu():
     try:
@@ -63,5 +92,8 @@ def print_menu():
     except:
         print("There are no Monsters Left!")
     main_menu()
+
+
+
 
 main_menu()
