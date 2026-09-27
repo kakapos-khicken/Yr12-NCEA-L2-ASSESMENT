@@ -1,5 +1,5 @@
 import easygui
-#9/9/26 Full preset monsters list
+#9/9/26 Full preset monsters list.
 monsters = {"Stoneling":{"Strength": 7,
                          "Speed": 1,
                          "Stealth": 25,
@@ -42,7 +42,7 @@ monsters = {"Stoneling":{"Strength": 7,
                          "Cunning": 2,}
                          }
 
-# this is my main menu code 
+# 15/9/26 This is my main menu code.
 def main_menu():
     action = easygui.buttonbox("What Would you like to do?", choices=['Add Monsters','Delete Monsters','Print Monsters','Quit'], title="Main Menu")
     if action == "Add Monsters":
@@ -52,53 +52,54 @@ def main_menu():
     elif action == "Print Monsters":
         print_menu()
     else:
-        easygui.msgbox("Thank you for playing. See you next time!!!")
+        easygui.msgbox("Thank you for playing. See you next time!!!", title="Goodbye")
         quit()
 
-# 9/9/26 working add menu. Thinking of adding a forced capital to the monsters name
+# 24/9/26 This is my add code. The monsters name has a forced capital at the start.
 def add_this():
-    ID = easygui.enterbox("\n\nEnter Monster name: ")
+    mname = easygui.enterbox("\n\nEnter Monster name: ", title="Monster name")
+    ID = mname.capitalize()
+    easygui.msgbox(f"Added a capital letter. Result: {ID}", title="Added a capital")
     monsters[ID] = {}
-    #22/9/26 need to add number cap of 25 to all .integerbox in def addthis
-    mstrength = easygui.integerbox("Enter Monsters strength: ")
+    #22/9/26 Need to add number cap of 25 to all .integerbox in def addthis.
+    mstrength = easygui.integerbox("Enter Monsters strength: ", title="Monster strength")
     monsters[ID]["strength"] = mstrength
 
-    mspeed = easygui.integerbox("Enter Monsters speed: ")
+    mspeed = easygui.integerbox("Enter Monsters speed: ", title="Monster speed")
     monsters[ID]["speed"] = mspeed
 
-    mstealth = easygui.integerbox("Enter Monsters stealth: ")
+    mstealth = easygui.integerbox("Enter Monsters stealth: ", title="Monster stealth")
     monsters[ID]["stealth"] = mstealth
 
-    mcunning = easygui.integerbox("Enter Monsters cunning: ")
+    mcunning = easygui.integerbox("Enter Monsters cunning: ", title="Monster cunning")
     monsters[ID]["cunning"] = mcunning
 
     easygui.msgbox(monsters)
 
- # 11/9/26 need to fix unexpected output issue. might swap .enterbox with .buttonbox
-    while True:
-        add = easygui.enterbox("Would you like to add another Monster? (Y/N):")
-        if add.capitalize() == "Y":
-            print("Let's add another Monster!")
-            add_this()
-        elif add.capitalize() == "N":
-            print("Thank you for adding another Monster!")
-            main_menu()
+ # 24/9/26 This code asks if you would like to add a new monster.
+    add = easygui.buttonbox("Would you like to add another Monster?", choices=("Yes", "No"), title="Add Another")
+    if add == "Yes":
+        easygui.msgbox("Let's add another Monster!", title="Add another monster")
+        add_this()
+    elif add == "No":
+        print("Thank you for adding another Monster!", title="Thank you")
+        main_menu()
 
-# 22/9/26 this is the code to delete a monster
+# 22/9/26 This is the code to delete a monster
 def delete():
-    kill = easygui.enterbox("Enter the name of the monster you want to delete:")
+    kill = easygui.enterbox("Enter the name of the monster you want to delete:", title="Delete monster")
     if kill.capitalize() in monsters:
         corrected_input = kill.capitalize()
-        easygui.msgbox(f"Result: {corrected_input}")
+        easygui.msgbox(f"You might of forgot a capital letter, so I added it for you. Result: {corrected_input}", title="Added a capital")
 
         monsters.pop(corrected_input)
         print(monsters)
         main_menu()
     else:
-        easygui.msgbox("That monster does not exist!!")
+        easygui.msgbox("That monster does not exist!!", title="Unknown monster")
         main_menu()
 
-# 22/9/26 this is the code to print all monsters. might see if i can add a random print
+# 28/9/26 This is the code to print all monsters.
 def print_menu():
     try:
         for monsters_id, monsters_info in monsters.items():
@@ -107,7 +108,7 @@ def print_menu():
             for key in monsters_info:
                 print (key + ":", monsters_info[key])
     except:
-        print("There are no Monsters Left!")
+        easygui.msgbox("There are no Monsters Left!", title="No more monsters")
     main_menu()
 
 
