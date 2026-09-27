@@ -81,8 +81,8 @@ def add_this():
     if add == "Yes":
         easygui.msgbox("Let's add another Monster!", title="Add another monster")
         add_this()
-    elif add == "No":
-        print("Thank you for adding another Monster!", title="Thank you")
+    else:
+        easygui.msgbox("Thank you for adding another Monster!", title="Thank you")
         main_menu()
 
 # 22/9/26 This is the code to delete a monster
