@@ -61,17 +61,17 @@ def add_this():
     ID = mname.capitalize()
     easygui.msgbox(f"Added a capital letter. Result: {ID}", title="Added a capital")
     monsters[ID] = {}
-    #22/9/26 Need to add number cap of 25 to all .integerbox in def addthis.
-    mstrength = easygui.integerbox("Enter Monsters strength: ", title="Monster strength")
+    #29/9/26 User can only enter a number inbetween 1 and 25. No more, no less.
+    mstrength = easygui.integerbox("Enter Monsters strength: (1 - 25)", title="Monster strength", lowerbound=1, upperbound=25)
     monsters[ID]["strength"] = mstrength
 
-    mspeed = easygui.integerbox("Enter Monsters speed: ", title="Monster speed")
+    mspeed = easygui.integerbox("Enter Monsters speed: (1 - 25)", title="Monster speed", lowerbound=1, upperbound=25)
     monsters[ID]["speed"] = mspeed
 
-    mstealth = easygui.integerbox("Enter Monsters stealth: ", title="Monster stealth")
+    mstealth = easygui.integerbox("Enter Monsters stealth: (1 - 25)", title="Monster stealth", lowerbound=1, upperbound=25)
     monsters[ID]["stealth"] = mstealth
 
-    mcunning = easygui.integerbox("Enter Monsters cunning: ", title="Monster cunning")
+    mcunning = easygui.integerbox("Enter Monsters cunning: (1 - 25)", title="Monster cunning", lowerbound=1, upperbound=25)
     monsters[ID]["cunning"] = mcunning
 
     easygui.msgbox(monsters)
@@ -85,10 +85,10 @@ def add_this():
         easygui.msgbox("Thank you for adding another Monster!", title="Thank you")
         main_menu()
 
-# 22/9/26 This is the code to delete a monster.
+# 29/9/26 This is the code to delete a monster. You can now delete all monsters or just one
 def delete():
-    choose = easygui.buttonbox("What would you like to delete?", choices=("Single monster", "All monsters"), title="Choose an option")
-    if choose == "Single Monster":
+    choose = easygui.buttonbox("What would you like to delete?", choices=("One monster", "All monsters"), title="Choose an option")
+    if choose == "One Monster":
         kill = easygui.enterbox("Enter the name of the monster you want to delete:", title="Delete monster")
         if kill.capitalize() in monsters:
             corrected_input = kill.capitalize()
@@ -107,17 +107,16 @@ def delete():
         main_menu()
 # 28/9/26 This is the code to print all monsters.
 def print_menu():
-    try:
+    if not monsters:
+        easygui.msgbox("There are no Monsters Left!", title="Clean plate")
+        main_menu()
+    else:
         for monsters_id, monsters_info in monsters.items():
             print("\nMonster ID:", monsters_id)
 
             for key in monsters_info:
                 print(key + ":", monsters_info[key])
-    except:
-        easygui.msgbox("There are no Monsters Left!")
     main_menu()
-
-
 
 
 main_menu()
