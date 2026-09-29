@@ -85,20 +85,26 @@ def add_this():
         easygui.msgbox("Thank you for adding another Monster!", title="Thank you")
         main_menu()
 
-# 22/9/26 This is the code to delete a monster
+# 22/9/26 This is the code to delete a monster.
 def delete():
-    kill = easygui.enterbox("Enter the name of the monster you want to delete:", title="Delete monster")
-    if kill.capitalize() in monsters:
-        corrected_input = kill.capitalize()
-        easygui.msgbox(f"You might of forgot a capital letter, so I added it for you. Result: {corrected_input}", title="Added a capital")
+    choose = easygui.buttonbox("What would you like to delete?", choices=("Single monster", "All monsters"), title="Choose an option")
+    if choose == "Single Monster":
+        kill = easygui.enterbox("Enter the name of the monster you want to delete:", title="Delete monster")
+        if kill.capitalize() in monsters:
+            corrected_input = kill.capitalize()
+            easygui.msgbox(f"You might of forgot a capital letter, so I added it for you. Result: {corrected_input}", title="Added a capital")
 
-        monsters.pop(corrected_input)
-        print(monsters)
-        main_menu()
+            monsters.pop(corrected_input)
+            print(monsters)
+            main_menu()
+        else:
+            easygui.msgbox("That monster does not exist!!", title="Unknown monster")
+            main_menu()
     else:
-        easygui.msgbox("That monster does not exist!!", title="Unknown monster")
+        monsters.clear()
+        print(monsters)
+        easygui.msgbox("All monsters have been deleted", title="Clean plate")
         main_menu()
-
 # 28/9/26 This is the code to print all monsters.
 def print_menu():
     try:
@@ -106,9 +112,9 @@ def print_menu():
             print("\nMonster ID:", monsters_id)
 
             for key in monsters_info:
-                print (key + ":", monsters_info[key])
+                print(key + ":", monsters_info[key])
     except:
-        easygui.msgbox("There are no Monsters Left!", title="No more monsters")
+        easygui.msgbox("There are no Monsters Left!")
     main_menu()
 
 
