@@ -1,5 +1,5 @@
 import easygui
-#9/9/26 Full preset monsters list.
+# Full preset monsters list.
 monsters = {"Stoneling":{"Strength": 7,
                          "Speed": 1,
                          "Stealth": 25,
@@ -43,7 +43,7 @@ monsters = {"Stoneling":{"Strength": 7,
                          }
 
 
-# 30/9/26 Added a .msgbox to explain what the program is about and how to use it.
+# Added a .msgbox to explain what the program is about and how to use it.
 easygui.msgbox("""Hi. This program is made for my friend who has a collection of""" \
 """ monster cards and would like to see all of them online. Other cool things have been added too! \n\n
 You can add new or add your own monsters to the collections. If you don't want"""\
@@ -53,7 +53,7 @@ You can add new or add your own monsters to the collections. If you don't want""
     , title="Intro")
 
 
-# 15/9/26 This is my main menu code.
+# This is my main menu code.
 def main_menu():
     action = easygui.buttonbox("What would you like to do?", choices=['Add Monsters','Delete Monsters','Print Monsters','Quit'], title="Main Menu")
     if action == "Add Monsters":
@@ -67,7 +67,7 @@ def main_menu():
         quit()
 
 
-# 24/9/26 This is my add code. The monsters name has a forced capital at the start.
+# This is my add code. The monsters name has a forced capital at the start.
 def add_this():
     easygui.msgbox("When asked to enter a number enter a number between 1 and 25.\n\n" \
     "If you don't, you'll be asked to enter the number again.", title="Add hint")
@@ -75,7 +75,7 @@ def add_this():
     ID = mname.capitalize()
     easygui.msgbox(f"Added a capital letter to your monsters name. Result: {ID}", title="Added a capital")
     monsters[ID] = {}
-    #29/9/26 User can only enter a number inbetween 1 and 25. No more, no less.
+    # User can only enter a number inbetween 1 and 25. No more, no less.
     mstrength = easygui.integerbox("Enter your monsters strength: (1 - 25)", title="Monster strength", lowerbound=1, upperbound=25)
     monsters[ID]["strength"] = mstrength
 
@@ -89,7 +89,7 @@ def add_this():
     monsters[ID]["cunning"] = mcunning
 
 
- # 24/9/26 This code asks if you would like to add a new monster.
+ # This code asks if you would like to add a new monster.
     add = easygui.buttonbox("Would you like to add another monster?", choices=("Yes", "No"), title="Add Another")
     if add == "Yes":
         easygui.msgbox("Let's add another monster!", title="Add another monster")
@@ -99,10 +99,10 @@ def add_this():
         main_menu()
 
 
-# 29/9/26 This is the code to delete a monster. You can now delete all monsters or just one.
+# This is the code to delete a monster. You can now delete all monsters or just one.
 def delete():
     choose = easygui.buttonbox("What would you like to delete?", choices=("One monster", "All monsters"), title="Choose an option")
-    if choose == "One Monster":
+    if choose == "One monster":
         kill = easygui.enterbox("Enter the name of the monster you want to delete:", title="Delete monster")
         if kill.capitalize() in monsters:
             corrected_input = kill.capitalize()
@@ -114,7 +114,7 @@ def delete():
         else:
             easygui.msgbox("That monster does not exist!!", title="Unknown monster")
             main_menu()
-# 2/10/26 This code ask to make sure if you want to delete all monsters or not.
+# This code ask to make sure if you want to delete all monsters or not.
     if choose == "All monsters":
         aus = easygui.buttonbox("Are you sure you want to delete all monsters? This can not be undone."\
                                 ,choices=("Yes", "No"), title="Are you sure")
@@ -128,12 +128,14 @@ def delete():
             main_menu()
 
 
-# 28/9/26 This is the code to print all monsters.
+# This is the code to print all monsters.
 def print_menu():
     if not monsters:
-        easygui.msgbox("There are no Monsters Left!", title="Clean plate")
+        # This will only print if no monsters are left.
+        easygui.msgbox("There are no monsters left!", title="Clean plate")
         main_menu()
     else:
+        # This will print monsters still in the list.
         for monsters_id, monsters_info in monsters.items():
             print("\nMonster ID:", monsters_id)
 
